@@ -31,6 +31,7 @@ class Node
     }
 
     /**
+     * Checking Node existence
      * @param Node $node
      * @return bool
      */
@@ -49,5 +50,21 @@ class Node
         $node->left  = new Node();
         $node->right = new Node();
         $node->value = $value;
+    }
+
+    /**
+     * Insert Node
+     * @param Node $node
+     * @param int $value
+     */
+    public function insertNode(Node $node, int $value): void
+    {
+        if (!$this->nodeExists($node)) {
+            $this->createNode($node, $value);
+        } elseif ($value < $node->value) {
+            $this->insertNode($node->left, $value);
+        } elseif ($value >= $node->value) {
+            $this->insertNode($node->right, $value);
+        }
     }
 }
