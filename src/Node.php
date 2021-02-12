@@ -36,7 +36,7 @@ class Node
      */
     public function insertNode(?Node $node, int $value): void
     {
-        if (!$this->nodeExists($node)) {
+        if (!$this->existNode($node)) {
             $this->createNode($node, $value);
         } elseif ($value < $node->value) {
             $this->insertNode($node->left, $value);
@@ -50,7 +50,7 @@ class Node
      * @param Node $node
      * @return bool
      */
-    public function nodeExists(Node $node): bool
+    public function existNode(Node $node): bool
     {
         return $node != null && $node->value != null;
     }
@@ -77,7 +77,7 @@ class Node
     {
         $result = null;
 
-        if (!$this->nodeExists($node)) {
+        if (!$this->existNode($node)) {
             $result = null;
         }
         if ($node->value == $value) {
@@ -101,13 +101,13 @@ class Node
     {
         $result = null;
 
-        if (!$this->nodeExists($node)) {
+        if (!$this->existNode($node)) {
             $result = null;
         }
-        if (!$this->nodeExists($node->left)) {
+        if (!$this->existNode($node->left)) {
             $result = $node;
         } else {
-            $result = getMin($node->left);
+            $result = $this->getMin($node->left);
         }
 
         return $result;
@@ -122,13 +122,13 @@ class Node
     {
         $result = null;
 
-        if (!$this->nodeExists($node)) {
+        if (!$this->existNode($node)) {
             $result = null;
         }
-        if (!$this->nodeExists($node->right)) {
+        if (!$this->existNode($node->right)) {
             $result = $node;
         } else {
-            $result = getMin($node->right);
+            $result = $this->getMax($node->right);
         }
 
         return $result;
@@ -157,7 +157,7 @@ class Node
     public function traversalInOrder(Node $node): ?array
     {
         $result = [];
-        if ($this->nodeExists($node)) {
+        if ($this->existNode($node)) {
             array_push($result, $this->traversalInOrder($node->left));
             array_push($result, $node->value);
             array_push($result, $this->traversalInOrder($node->right));
@@ -172,7 +172,7 @@ class Node
     public function traversalPostOrder(Node $node): ?array
     {
         $result = [];
-        if ($this->nodeExists($node)) {
+        if ($this->existNode($node)) {
             array_push($result, $this->traversalPostOrder($node->left));
             array_push($result, $this->traversalPostOrder($node->right));
             array_push($result, $node->value);
@@ -188,7 +188,7 @@ class Node
     public function traversalPreOrder(Node $node): ?array
     {
         $result = [];
-        if ($this->nodeExists($node)) {
+        if ($this->existNode($node)) {
             array_push($result, $node->value);
             array_push($result, $this->traversalPreOrder($node->left));
             array_push($result, $this->traversalPreOrder($node->right));
