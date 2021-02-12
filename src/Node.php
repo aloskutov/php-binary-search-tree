@@ -92,4 +92,20 @@ class Node
         }
         return $result;
     }
+
+    public function getMin(Node $node): ?Node
+    {
+        $result = null;
+
+        if (!$this->nodeExists($node)) {
+            $result = null;
+        }
+        if (!$this->nodeExists($node->left)) {
+            $result = $node;
+        } else {
+            $result = getMin($node->left);
+        }
+
+        return $result;
+    }
 }
