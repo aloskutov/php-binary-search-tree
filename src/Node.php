@@ -113,4 +113,25 @@ class Node
 
         return $result;
     }
+
+    /**
+     * Getting maximum Node
+     * @param Node $node
+     * @return Node|null
+     */
+    public function getMax(Node $node): ?Node
+    {
+        $result = null;
+
+        if (!$this->nodeExists($node)) {
+            $result = null;
+        }
+        if (!$this->nodeExists($node->right)) {
+            $result = $node;
+        } else {
+            $result = getMin($node->right);
+        }
+
+        return $result;
+    }
 }
