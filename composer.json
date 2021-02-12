@@ -1,0 +1,16 @@
+{
+    "name": "alex/binary-search-tree",
+    "description": "",
+    "authors": [
+        {
+            "name": "Alex Loskutov",
+            "email": "599181+aloskutov@users.noreply.github.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "require": {}
+}
