@@ -8,23 +8,22 @@ class Node
 {
     /**
      * Node left child
-     * @var Node
+     * @var Node|null
      */
-    public Node $left;
+    public ?Node $left = null;
     /**
      * Node right child
-     * @var Node
+     * @var Node|null
      */
-    public Node $right;
+    public ?Node $right = null;
     /**
      * Node value
-     * @var int
+     * @var int|null
      */
-    public int $value;
+    public ?int $value = null;
 
     /**
      * Node constructor.
-     * @param Node|null $node
      */
     public function __construct()
     {
@@ -32,10 +31,10 @@ class Node
 
     /**
      * Insert Node
-     * @param Node $node
+     * @param Node|null $node
      * @param int $value
      */
-    public function insertNode(Node $node, int $value): void
+    public function insertNode(?Node $node, int $value): void
     {
         if (!$this->nodeExists($node)) {
             $this->createNode($node, $value);
