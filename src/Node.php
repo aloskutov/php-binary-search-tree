@@ -38,4 +38,16 @@ class Node
     {
         return $node != null && $node->value != null;
     }
+
+    /**
+     * Create Node
+     * @param Node $node
+     * @param int $value
+     */
+    public function createNode(Node $node, int $value): void
+    {
+        $node->left  = new Node();
+        $node->right = new Node();
+        $node->value = $value;
+    }
 }
