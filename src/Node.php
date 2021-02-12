@@ -133,4 +133,67 @@ class Node
 
         return $result;
     }
+
+    /**
+     * Convert a multi-dimensional array into a single-dimensional array.
+     * @param $items
+     * @return array|mixed
+     */
+    private function arrayFlatten($items): array
+    {
+        if (!is_array($items)) {
+            return [$items];
+        }
+
+        return array_reduce($items, function ($carry, $item) {
+            return array_merge($carry, $this->arrayFlatten($item));
+        }, []);
+    }
+
+    /**
+     * @param Node $node
+     * @return array|null
+     */
+    public function traversalInOrder(Node $node): ?array
+    {
+        $result = [];
+        if ($this->nodeExists($node)) {
+            array_push($result, $this->traversalInOrder($node->left));
+            array_push($result, $node->value);
+            array_push($result, $this->traversalInOrder($node->right));
+        }
+        return $this->arrayFlatten($result);
+    }
+
+    /**
+     * @param Node $node
+     * @return array|null
+     */
+    public function traversalPostOrder(Node $node): ?array
+    {
+        $result = [];
+        if ($this->nodeExists($node)) {
+            array_push($result, $this->traversalPostOrder($node->left));
+            array_push($result, $this->traversalPostOrder($node->right));
+            array_push($result, $node->value);
+        }
+
+        return $this->arrayFlatten($result);
+    }
+
+    /**
+     * @param Node $node
+     * @return array|null
+     */
+    public function traversalPreOrder(Node $node): ?array
+    {
+        $result = [];
+        if ($this->nodeExists($node)) {
+            array_push($result, $node->value);
+            array_push($result, $this->traversalPreOrder($node->left));
+            array_push($result, $this->traversalPreOrder($node->right));
+        }
+
+        return $this->arrayFlatten($result);
+    }
 }
