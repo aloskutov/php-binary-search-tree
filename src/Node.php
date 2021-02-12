@@ -93,6 +93,11 @@ class Node
         return $result;
     }
 
+    /**
+     * Getting the minimum Node
+     * @param Node $node
+     * @return Node|null
+     */
     public function getMin(Node $node): ?Node
     {
         $result = null;
