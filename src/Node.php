@@ -31,6 +31,22 @@ class Node
     }
 
     /**
+     * Insert Node
+     * @param Node $node
+     * @param int $value
+     */
+    public function insertNode(Node $node, int $value): void
+    {
+        if (!$this->nodeExists($node)) {
+            $this->createNode($node, $value);
+        } elseif ($value < $node->value) {
+            $this->insertNode($node->left, $value);
+        } elseif ($value >= $node->value) {
+            $this->insertNode($node->right, $value);
+        }
+    }
+
+    /**
      * Checking Node existence
      * @param Node $node
      * @return bool
@@ -47,24 +63,33 @@ class Node
      */
     public function createNode(Node $node, int $value): void
     {
-        $node->left  = new Node();
+        $node->left = new Node();
         $node->right = new Node();
         $node->value = $value;
     }
 
     /**
-     * Insert Node
+     * Search Node
      * @param Node $node
      * @param int $value
+     * @return Node|null
      */
-    public function insertNode(Node $node, int $value): void
+    public function searchNode(Node $node, int $value): ?Node
     {
+        $result = null;
+
         if (!$this->nodeExists($node)) {
-            $this->createNode($node, $value);
-        } elseif ($value < $node->value) {
-            $this->insertNode($node->left, $value);
-        } elseif ($value >= $node->value) {
-            $this->insertNode($node->right, $value);
+            $result = null;
         }
+        if ($node->value == $value) {
+            $result = $node;
+        }
+        if ($value < $node->value) {
+            $result = $this->searchNode($node->left, $value);
+        }
+        if ($value > $node->value) {
+            $result = $this->searchNode($node->right, $value);
+        }
+        return $result;
     }
 }
