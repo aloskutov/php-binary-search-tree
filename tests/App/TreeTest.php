@@ -31,7 +31,7 @@ class TreeTest extends TestCase
             $this->node->insertNode($this->node, $item);
         }
 
-        $this->assertEquals($expected, $this->node->searchNode($this->node, $value)->value);
+        $this->assertEquals($expected, $this->node->searchNode($this->node, $value)->getValue());
     }
 
     /**
