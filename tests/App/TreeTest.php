@@ -2,13 +2,15 @@
 
 declare(strict_types=1);
 
-namespace App;
+//namespace App;
 
+use App\Node;
+use App\Tree;
 use PHPUnit\Framework\TestCase;
 
 /**
  * Class TreeTest
- * @covers \App\Tree
+ * @package App\Tree
  */
 class TreeTest extends TestCase
 {
