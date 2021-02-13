@@ -4,8 +4,6 @@ namespace App;
 
 require_once './vendor/autoload.php';
 
-use App\Node;
-
 $node = new Node();
 $node->createNode($node, 15);
 $node->insertNode($node, 16);
