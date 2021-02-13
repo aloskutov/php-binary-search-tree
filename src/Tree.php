@@ -64,8 +64,7 @@ class Tree extends Node
             if ($node->getValue() > $value) {
                 $result = $this->searchNode($node->getLeft(), $value);
             }
-        }
-        else {
+        } else {
             $result = null;
         }
         return $result;

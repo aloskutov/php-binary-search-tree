@@ -28,8 +28,10 @@ class NodeTest extends TestCase
      */
     public function testLeft()
     {
-        $this->node->setLeft(new Node);
+        $left = new Node();
+        $this->node->setLeft($left);
         $this->assertIsObject($this->node->getLeft());
+        unset($left);
     }
 
     /**
@@ -38,8 +40,10 @@ class NodeTest extends TestCase
      */
     public function testRight()
     {
-        $this->node->setRight(new Node);
+        $right = new Node();
+        $this->node->setRight($right);
         $this->assertIsObject($this->node->getRight());
+        unset($right);
     }
 
     public function setUp(): void
