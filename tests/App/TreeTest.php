@@ -2,15 +2,14 @@
 
 declare(strict_types=1);
 
-//namespace App;
+namespace App;
 
-use App\Node;
-use App\Tree;
 use PHPUnit\Framework\TestCase;
 
 /**
  * Class TreeTest
- * @package App\Tree
+ * @covers \App\Tree
+ * @covers \App\Node
  */
 class TreeTest extends TestCase
 {
@@ -76,6 +75,16 @@ class TreeTest extends TestCase
             $this->node->insertNode($this->node, $item);
         }
         $this->assertEquals($expMax, $this->node->getMax($this->node)->getValue());
+    }
+
+    /**
+     * @covers \App\Tree::getMax
+     * @covers \App\Tree::getMin
+     */
+    public function testNonExistentNode()
+    {
+        $this->assertNull($this->node->getMin($this->node)->getValue());
+        $this->assertNull($this->node->getMax($this->node)->getValue());
     }
 
     /**
