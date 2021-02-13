@@ -10,17 +10,17 @@ class Node
      * Node left child
      * @var Node|null
      */
-    public ?Node $left = null;
+    private ?Node $left = null;
     /**
      * Node right child
      * @var Node|null
      */
-    public ?Node $right = null;
+    private ?Node $right = null;
     /**
      * Node value
      * @var int|null
      */
-    public ?int $value = null;
+    private ?int $value = null;
 
     /**
      * @param int|null $value
