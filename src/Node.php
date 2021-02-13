@@ -77,17 +77,19 @@ class Node
     {
         $result = null;
 
-        if (!$this->existNode($node)) {
+        if ($this->existNode($node)) {
+            if ($node->value == $value) {
+                $result = $node;
+            }
+            if ($node->value < $value) {
+                $result = $this->searchNode($node->right, $value);
+            }
+            if ($node->value > $value) {
+                $result = $this->searchNode($node->left, $value);
+            }
+        }
+        else {
             $result = null;
-        }
-        if ($node->value == $value) {
-            $result = $node;
-        }
-        if ($value < $node->value) {
-            $result = $this->searchNode($node->left, $value);
-        }
-        if ($value > $node->value) {
-            $result = $this->searchNode($node->right, $value);
         }
         return $result;
     }
