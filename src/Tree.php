@@ -26,7 +26,7 @@ class Tree extends Node
 
     /**
      * Checking Node existence
-     * @param Node $node
+     * @param Node|null $node
      * @return bool
      */
     #[Pure] public function existNode(?Node $node): bool
