@@ -174,4 +174,78 @@ class Tree extends Node
         }
         return $this->arrayFlatten($result);
     }
+
+    /**
+     * @param Node $toNode
+     * @param Node $fromNode
+     */
+    private function transplantNode(Node $toNode, Node $fromNode)
+    {
+        $toNode->setValue($fromNode->getValue());
+        $toNode->setLeft($fromNode->getLeft());
+        $toNode->setRight($fromNode->getRight());
+    }
+
+    /**
+     * @param Node $node
+     * @return int
+     */
+    private function getChildrenCount(Node $node): int
+    {
+        $count = 0;
+
+        if ($this->existNode($node->getLeft())) {
+            ++$count;
+        }
+        if ($this->existNode($node->getRight())) {
+            ++$count;
+        }
+        return $count;
+    }
+
+    /**
+     * @param Node $node
+     * @return Node|null
+     */
+    private function getChildOrNull(Node $node): ?Node
+    {
+        return $this->existNode($node->getLeft())
+            ? $node->getLeft()
+            : $node->getRight();
+    }
+
+    /**
+     * @param Node $nodeToDelete
+     */
+    private function deleteNodeWithOneOrZeroChild(Node $nodeToDelete)
+    {
+        $childOrNull = $this->getChildOrNull($nodeToDelete);
+        $this->transplantNode($nodeToDelete, $childOrNull);
+    }
+
+    /**
+     * remove Node
+     * @param Node $root
+     * @param int $value
+     * @return bool
+     */
+    public function removeNode(Node $root, int $value): bool
+    {
+        $result = false;
+
+        $nodeToDelete = $this->searchNode($root, $value);
+
+        if ($this->existNode($nodeToDelete)) {
+            $childrenCount = $this->getChildrenCount($nodeToDelete);
+            if ($childrenCount < 2) {
+                $this->deleteNodeWithOneOrZeroChild($nodeToDelete);
+            } else {
+                $minNode = $this->getMin($nodeToDelete->getRight());
+                $nodeToDelete->setValue($minNode->getValue());
+                $this->deleteNodeWithOneOrZeroChild($minNode);
+            }
+            $result = true;
+        }
+        return $result;
+    }
 }

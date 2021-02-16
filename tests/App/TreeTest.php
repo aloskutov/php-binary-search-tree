@@ -130,6 +130,21 @@ class TreeTest extends TestCase
     }
 
     /**
+     * @covers \App\Tree::removeNode
+     * @param bool $expected
+     * @param int $value
+     * @param array $data
+     * @dataProvider removeProvider
+     */
+    public function testRemoveNode(bool $expected, int $value, array $data)
+    {
+        foreach ($data as $item) {
+            $this->node->insertNode($this->node, $item);
+        }
+        $this->assertEquals($expected, $this->node->removeNode($this->node, $value));
+    }
+
+    /**
      * @return array
      */
     public function insertionProvider(): array
@@ -215,6 +230,18 @@ class TreeTest extends TestCase
                 [8, 7, 6, 5, 3, 2, 1, 10, 9, 12, 15, 18, 17, 21, 19],
                 [8, 7, 10, 9, 6, 12, 5, 15, 3, 2, 1, 18, 17, 21, 19]
             ],
+        ];
+    }
+
+    public function removeProvider(): array
+    {
+        return [
+            [true, 1, [2, 1, 3]],
+            [true, 3, [2, 1, 3]],
+            [true, 2, [2, 1, 3]],
+            [true, 5, [4, 5, 7, 6, 2, 1, 3]],
+            [true, 7, [4, 5, 7, 6, 2, 1, 3]],
+            [false, 8, [4, 5, 7, 6, 2, 1, 3]],
         ];
     }
 
