@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App;
 
-use JetBrains\PhpStorm\Pure;
-
 class Tree extends Node
 {
     /**
@@ -29,7 +27,7 @@ class Tree extends Node
      * @param Node|null $node
      * @return bool
      */
-    #[Pure] public function existNode(?Node $node): bool
+    public function existNode(?Node $node): bool
     {
         return $node != null && $node->getValue() != null;
     }
