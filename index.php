@@ -16,4 +16,4 @@ $node->insertNode($node, 17);
 //var_dump($node->traversalPostOrder($node));
 //var_dump($node->traversalPreOrder($node));
 
-var_dump($node->getMax($node)->value);
+var_dump($node->getMax($node)->getValue());
